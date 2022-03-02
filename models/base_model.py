@@ -16,12 +16,11 @@ class BaseModel:
             self.updated_at = datetime.now()
         else:
             for key in kwargs:
-                kwargs["created_at"] = datetime.strptime(kwargs["created_at"],
-                                                     "%Y-%m-%d:%H:%M:%S.%f")
-                kwargs["updated_at"] = datetime.strptime(kwargs["updated_at"],
-                                                     "%Y-%m-%d:%H:%M:%S.%f")
+                setattr(self, key, datetime.strptime(kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
+                setattr(self, key, datetime.strptime(kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
                 for key, val in kwargs.items():
                     if "__class__" not in key:
+                        if 
                         setattr(self, key, val)
 
     def __str__(self):
@@ -39,6 +38,6 @@ class BaseModel:
         '''
         cpy_dic = dict(self.__dict__)
         cpy_dic['__class__'] = self.__class__.__name__
-        cpy_dic['updated_at'] = self.updated_at.srtftime("%Y-%m-%d%H:%M:%S.%f")
-        cpy_dic['created_at'] = self.created_at.strftime("%Y-%m-%d%H:%M:%S.%f")
+        cpy_dic['updated_at'] = self.updated_at.isoformat()
+        cpy_dic['created_at'] = self.created_at.isoformat()
         return(cpy_dic)
