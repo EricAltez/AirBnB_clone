@@ -23,9 +23,9 @@ class FileStorage:
         odic = {}
         for key, val in FileStorage.__objects.item():
             odic[key] = val.to_dict()
-        with open(FileStorage.__file_path, "w") as wf:
-            json.dumps(odic,wf, indent=4)
+        with open(FileStorage.__file_path, "w+") as wf:
+            json.dump(odic, wf, indent=4)
 
     def reload(self):
         '''deserealizes the JSON file to object'''
-        if __file_path
+        pass
