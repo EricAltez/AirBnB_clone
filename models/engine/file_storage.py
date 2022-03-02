@@ -28,4 +28,11 @@ class FileStorage:
 
     def reload(self):
         '''deserealizes the JSON file to object'''
-        pass
+        try:
+            with open(FileStorage.__file_path) as wd:
+                FileStorage.__object = json.load(wd)
+                ax = json.load(wd)
+                    for key, val in ax.item():
+                        val = BaseModel(**val)
+                    self.__object = ax
+
