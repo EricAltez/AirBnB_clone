@@ -6,6 +6,7 @@ Base model module
 import uuid
 from datetime import datetime
 
+
 class BaseModel:
     '''class defines all commons attributes/methods for other classes'''
     def __init__(self, *args, **kwargs):
@@ -15,13 +16,15 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
-            for key in kwargs:
-                setattr(self, key, datetime.strptime(kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
-                setattr(self, key, datetime.strptime(kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
-                for key, val in kwargs.items():
-                    if "__class__" not in key:
-                        if 
-                        setattr(self, key, val)
+            for key, val in kwargs.item():
+                if key == __class__:
+                    continue
+                else:
+                    setattr((self, key, datetime.strptime(
+                        kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f"))
+                    setattr((self, key, datetime.strptime(
+                        kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f"))
+                    setattr(self, key, val)
 
     def __str__(self):
         '''string representation of basemodel'''
@@ -29,15 +32,15 @@ class BaseModel:
 
     def save(self):
         '''update the public instance attributte'''
-        self.update_at = datetime.now()
+        self.update_at=datetime.now()
 
     def to_dict(self):
         '''
         returns a dictionary containing all
         keys/values of __dict__ instance
         '''
-        cpy_dic = dict(self.__dict__)
-        cpy_dic['__class__'] = self.__class__.__name__
-        cpy_dic['updated_at'] = self.updated_at.isoformat()
-        cpy_dic['created_at'] = self.created_at.isoformat()
-        return(cpy_dic)
+        cpy_dic=dict(self.__dict__)
+        cpy_dic['__class__']=self.__class__.__name__
+        cpy_dic['updated_at']=self.updated_at.isoformat()
+        cpy_dic['created_at']=self.created_at.isoformat()
+        return (cpy_dic)

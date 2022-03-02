@@ -12,11 +12,11 @@ import json
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbtn) '
 
-    def do_create(self, command)
+    def do_create(self, command):
         """
         Create a class instance
         """
-        if (!command):
+        if (len(command) < 1):
             print('** class name missing **')
             return
         new_obj.save()
@@ -27,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
         Prints the string representation of a class instance nased on id
         Usage: show <class_name> <id>
         """
-        if (!command):
+        if (len(command) < 1):
             print('** class name missing **')
             return
 
