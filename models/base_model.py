@@ -16,12 +16,12 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
-            for key, val in kwargs.item():
-                if key == __class__:
+            for key, val in kwargs.items():
+                if key == '__class__':
                     continue
-                tl = "%Y-%m-%dT%H:%M:%S.%f"
-                if key == "created_at" or key == "upadeted_at":
-                    setattr(self, key, datetime.strptime(val.isoformat(t1)))
+                tf = "%Y-%m-%dT%H:%M:%S.%f"
+                if key == "created_at" or key == "updated_at":
+                    setattr(self, key, datetime.strptime(val, tf))
                 else:
                     setattr(self, key, val)
 
