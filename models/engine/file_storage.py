@@ -20,10 +20,9 @@ class FileStorage:
 
     def save(self):
         '''serializes objects to JSON path'''
-        print("entered save")
         odic = {}
 
-        with open(self.__file_path, "w+") as wf:
+        with open(self.__file_path, "w") as wf:
             print(self.__objects)
             for key, val in self.__objects.items():
                 odic[key] = val.to_dict()
@@ -36,7 +35,7 @@ class FileStorage:
                 my_dict = json.loads(wd)
                 for key, val in my_dict.items():
                     my_object = key.split('.')
-                    class_name = my_object[key]
+                    class_name = my_object[0]
                     self.new(eval(f"{class_name})(**{val})"))
         except Exception as ex:
             pass

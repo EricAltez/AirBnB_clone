@@ -43,7 +43,11 @@ class HBNBCommand(cmd.Cmd):
             print ("** instance id missing **")
             return
         try:
-            print (storage.all()(f"{com[0]}"+ "." +"{com[1]}"))
+            print(com[0])
+            print (com[1])
+            print('"{}.{}"'.format(com[0], com[1]))
+            print(storage.all())
+            print (storage.all()[f'{com[0]}.{com[1]}'])
         except:
             print ("** no instance found **")
 
