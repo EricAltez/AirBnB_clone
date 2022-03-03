@@ -16,25 +16,27 @@ class FileStorage:
         '''set objects in objects with key'''
         keys = f"{obj.__class__.__name__}.{obj.id}"
         v_d = obj
-        FileStorage.__objects[keys] = v_d
+        self.__objects[keys] = v_d
 
     def save(self):
         '''serializes objects to JSON path'''
-        odic = {} 
-        with open(FileStorage.__file_path, "w+") as wf:
-            for key, val in FileStorage.__objects.items():
+        print("entered save")
+        odic = {}
+
+        with open(self.__file_path, "w+") as wf:
+            print(self.__objects)
+            for key, val in self.__objects.items():
                 odic[key] = val.to_dict()
-                print(odic)
-            wf.write(json.dumps(odic))
+            wf.write(json.dumps(odic, default=str))
 
     def reload(self):
         '''deserealizes the JSON file to object'''
         try:
             with open(self.__file_path) as wd:
-                my_dict = json.load(wd)
+                my_dict = json.loads(wd)
                 for key, val in my_dict.items():
                     my_object = key.split('.')
                     class_name = my_object[0]
-                    self.new(eval(f"{class_name}")(**val))
-        except FileNotFoundError:
+                    self.new(eval(f"{class_name})(**{val})"))
+        except Exception as ex:
             pass
