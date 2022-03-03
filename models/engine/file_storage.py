@@ -36,7 +36,7 @@ class FileStorage:
                 my_dict = json.loads(wd)
                 for key, val in my_dict.items():
                     my_object = key.split('.')
-                    class_name = my_object[0]
+                    class_name = my_object[key]
                     self.new(eval(f"{class_name})(**{val})"))
         except Exception as ex:
             pass

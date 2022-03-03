@@ -6,6 +6,8 @@ Uses python cmd
 """
 import cmd
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+from models import storage
 import json
 
 
@@ -19,6 +21,10 @@ class HBNBCommand(cmd.Cmd):
         if (len(command) < 1):
             print('** class name missing **')
             return
+        if command != "BaseModel":
+            print ("** class doesn't exist **")
+            return
+        new_obj = BaseModel()
         new_obj.save()
         print(new_obj.id)
 
@@ -29,7 +35,17 @@ class HBNBCommand(cmd.Cmd):
         """
         if (len(command) < 1):
             print('** class name missing **')
+        com = command.split()
+        if com[0] != "BaseModel":
+            print ("** class doesn't exist **")
             return
+        if len(com) < 2:
+            print ("** instance id missing **")
+            return
+        try:
+            print (storage.all()(f"{com[0]}"+ "." +"{com[1]}"))
+        except:
+            print ("** no instance found **")
 
     def do_quit(self, command):
         """
