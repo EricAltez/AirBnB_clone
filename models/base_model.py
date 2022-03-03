@@ -5,6 +5,7 @@ Base model module
 '''
 import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel:
@@ -32,6 +33,7 @@ class BaseModel:
     def save(self):
         '''update the public instance attributte'''
         self.update_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         '''

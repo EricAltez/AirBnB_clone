@@ -10,7 +10,7 @@ class FileStorage:
 
     def all(self):
         '''return the dictionary'''
-        return(self.__object)
+        return(self.__objects)
 
     def new(self, obj):
         '''set objects in objects with key'''
@@ -21,7 +21,7 @@ class FileStorage:
     def save(self):
         '''serializes objects to JSON path'''
         odic = {}
-        for key, val in FileStorage.__objects.item():
+        for key, val in FileStorage.__objects.items():
             odic[key] = val.to_dict()
         with open(FileStorage.__file_path, "w+") as wf:
             json.dump(odic, wf, indent=4)
@@ -29,10 +29,11 @@ class FileStorage:
     def reload(self):
         '''deserealizes the JSON file to object'''
         try:
-            with open(FileStorage.__file_path) as wd:
-                FileStorage.__object = json.load(wd)
-                ax = json.load(wd)
-                for key, val in ax.item():
-                    val = BaseModel(**val)
-                    self.__object = ax
-
+            with open(self.__file_path) as wd:
+                my_dict = json.load(wd)
+                for key, val in my_dict.items():
+                    my_object = key.split('.')
+                    class_name = my_object[0]
+                    self.new(eval(f"{class_name}")(**val))
+        except FileNotFoundError:
+            pass
