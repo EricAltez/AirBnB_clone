@@ -64,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
         Usage: EOF
         """
         return True
-
+asdasd
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
