@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 '''class filestorage'''
 import json
-
+from models.base_model import BaseModel
 
 class FileStorage:
     '''serialize instance to JSON'''
@@ -15,27 +15,28 @@ class FileStorage:
     def new(self, obj):
         '''set objects in objects with key'''
         keys = f"{obj.__class__.__name__}.{obj.id}"
-        v_d = obj
-        self.__objects[keys] = v_d
+        self.__objects[keys] = obj
 
     def save(self):
         '''serializes objects to JSON path'''
         odic = {}
-
-        with open(self.__file_path, "w") as wf:
-            print(self.__objects)
-            for key, val in self.__objects.items():
-                odic[key] = val.to_dict()
-            wf.write(json.dumps(odic, default=str))
+        try:
+            with open(self.__file_path, "w+") as wf:
+                for key, val in self.__objects.items():
+                    odic[key] = val.to_dict()
+                json.dump(odic, wf, default=str)
+        except Exception as ex:
+            pass
 
     def reload(self):
         '''deserealizes the JSON file to object'''
         try:
             with open(self.__file_path) as wd:
-                my_dict = json.loads(wd)
+                my_dict = json.load(wd)
                 for key, val in my_dict.items():
                     my_object = key.split('.')
                     class_name = my_object[0]
-                    self.new(eval(f"{class_name})(**{val})"))
+                    x = eval(class_name)(**val)
+                    self.__objects[key] = x
         except Exception as ex:
             pass

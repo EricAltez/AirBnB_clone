@@ -41,7 +41,8 @@ class BaseModel:
         returns a dictionary containing all
         keys/values of __dict__ instance
         '''
-        cpy_dic = dict(self.__dict__)
+        cpy_dic = self.__dict__.copy()
+        print (cpy_dic)
         cpy_dic['__class__'] = self.__class__.__name__
         cpy_dic['updated_at'] = self.updated_at.isoformat()
         cpy_dic['created_at'] = self.created_at.isoformat()
