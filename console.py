@@ -10,6 +10,7 @@ from models import storage
 import json
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbtn) '
 
@@ -120,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         '''
-        add empty line 
+        add empty line
         '''
         return
 
