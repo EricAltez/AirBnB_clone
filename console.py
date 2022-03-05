@@ -12,7 +12,7 @@ import cmd
 
 
 class HBNBCommand(cmd.Cmd):
-    prompt = '(hbtn) '
+    prompt = '(hbnb) '
 
     def do_create(self, command):
         """
