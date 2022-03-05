@@ -22,7 +22,7 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return
         if command != "BaseModel":
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
             return
         new_obj = BaseModel()
         new_obj.save()
@@ -39,17 +39,17 @@ class HBNBCommand(cmd.Cmd):
 
         com = command.split()
         if com[0] != "BaseModel":
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
             return
 
         if len(com) == 1:
-            print ("** instance id missing **")
+            print("** instance id missing **")
             return
 
         try:
-            print (storage.all()[f'{com[0]}.{com[1]}'])
-        except:
-            print ("** no instance found **")
+            print(storage.all()[f'{com[0]}.{com[1]}'])
+        except Exception as err:
+            print("** no instance found **")
 
     def do_destroy(self, command):
         """
@@ -61,28 +61,28 @@ class HBNBCommand(cmd.Cmd):
 
         com = command.split()
         if com[0] != "BaseModel":
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
             return
 
         if len(com) == 1:
-            print ("** instance id missing **")
+            print("** instance id missing **")
             return
 
         try:
             des = storage.all()
             des.pop(f'{com[0]}.{com[1]}')
-        except:
-            print ("** no instance found **")
+        except Exception as err:
+            print("** no instance found **")
 
     def do_all(self, command):
         """
-        Prints all string representation of all 
+        Prints all string representation of all
         instances based or not on the class name
         """
         if (len(command) == 0 or command == "BaseModel"):
             strd_k = storage.all().items()
             strd = {str(key): str(value) for key, value in strd_k}
-            print (strd)
+            print(strd)
         else:
             if (command != "BaseModel"):
                 print("** class doesn't exist **")
@@ -98,17 +98,26 @@ class HBNBCommand(cmd.Cmd):
 
         com = command.split()
         if com[0] != "BaseModel":
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
             return
 
         if len(com) == 1:
-            print ("** instance id missing **")
+            print("** instance id missing **")
             return
 
+        if len(com) == 2:
+            print("** attribute name missing **")
+            return
 
-        except:
-            print ("** no instance found **")
+        if len(com) == 3:
+            print("** value missing **")
+            return
 
+        try:
+            dict_k = (f'{com[0]}.{com[1]}')
+            setattr(storage.all()[dict_k], com[2], com[3])
+        except Exception as err:
+            print("** no instance found **")
 
     def do_quit(self, command):
         """
@@ -123,8 +132,7 @@ class HBNBCommand(cmd.Cmd):
         Usage: EOF
         """
         return True
-    
-  
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
