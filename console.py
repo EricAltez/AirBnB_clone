@@ -7,12 +7,22 @@ Uses python cmd
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
+from models.user import User
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+from models.state import State
 import json
 import cmd
 
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
+
+    def basename(self):
+        bn_list = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+        return (bn_list)
 
     def do_create(self, command):
         """
@@ -21,10 +31,11 @@ class HBNBCommand(cmd.Cmd):
         if (len(command) < 1):
             print('** class name missing **')
             return
-        if command != "BaseModel":
+        if (command not in self.basename()):
             print("** class doesn't exist **")
             return
-        new_obj = BaseModel()
+        com = command.split()
+        new_obj = eval(f"{com[0]}()")
         new_obj.save()
         print(new_obj.id)
 
@@ -38,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         com = command.split()
-        if com[0] != "BaseModel":
+        if (com[0] not in self.basename()):
             print("** class doesn't exist **")
             return
 
@@ -60,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         com = command.split()
-        if com[0] != "BaseModel":
+        if (com[0] not in self.basename()):
             print("** class doesn't exist **")
             return
 
@@ -79,12 +90,13 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of all
         instances based or not on the class name
         """
-        if (len(command) == 0 or command == "BaseModel"):
+        com = command.split()
+        if (len(command) == 0 or com[0] in self.basename()):
             strd_k = storage.all().items()
             strd = {str(key): str(value) for key, value in strd_k}
             print(strd)
         else:
-            if (command != "BaseModel"):
+            if (com[0] not in self.basename()):
                 print("** class doesn't exist **")
                 return
 
@@ -97,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         com = command.split()
-        if com[0] != "BaseModel":
+        if (com[0] not in self.basename()):
             print("** class doesn't exist **")
             return
 
