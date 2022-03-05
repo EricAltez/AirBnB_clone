@@ -3,9 +3,10 @@
 Base model module
 
 '''
-import uuid
+
 from datetime import datetime
 import models
+import uuid
 
 
 class BaseModel:
@@ -42,7 +43,7 @@ class BaseModel:
         keys/values of __dict__ instance
         '''
         cpy_dic = self.__dict__.copy()
-        print (cpy_dic)
+        print(cpy_dic)
         cpy_dic['__class__'] = self.__class__.__name__
         cpy_dic['updated_at'] = self.updated_at.isoformat()
         cpy_dic['created_at'] = self.created_at.isoformat()
