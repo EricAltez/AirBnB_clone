@@ -4,12 +4,11 @@ Console module
 Entry point
 Uses python cmd
 """
-import cmd
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
 import json
-
+import cmd
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbtn) '
@@ -118,6 +117,12 @@ class HBNBCommand(cmd.Cmd):
             setattr(storage.all()[dict_k], com[2], com[3])
         except Exception as err:
             print("** no instance found **")
+
+    def emptyline(self):
+        '''
+        add empty line 
+        '''
+        return
 
     def do_quit(self, command):
         """
