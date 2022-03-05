@@ -33,20 +33,20 @@ class HBNBCommand(cmd.Cmd):
         Prints the string representation of a class instance nased on id
         Usage: show <class_name> <id>
         """
-        if (len(command) < 1):
+        if (len(command) == 0):
             print('** class name missing **')
+            return
+
         com = command.split()
         if com[0] != "BaseModel":
             print ("** class doesn't exist **")
             return
-        if len(com) < 2:
+
+        if len(com) == 1:
             print ("** instance id missing **")
             return
+
         try:
-            print(com[0])
-            print (com[1])
-            print('"{}.{}"'.format(com[0], com[1]))
-            print(storage.all())
             print (storage.all()[f'{com[0]}.{com[1]}'])
         except:
             print ("** no instance found **")
@@ -64,7 +64,6 @@ class HBNBCommand(cmd.Cmd):
         Usage: EOF
         """
         return True
-asdasd
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
