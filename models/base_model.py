@@ -9,7 +9,7 @@ import models
 import uuid
 
 
-class BaseModel:
+class BaseModel():
     '''class defines all commons attributes/methods for other classes'''
     def __init__(self, *args, **kwargs):
         '''function to inicialize all instances atrributes'''
@@ -45,6 +45,7 @@ class BaseModel:
         cpy_dic = self.__dict__.copy()
         print(cpy_dic)
         cpy_dic['__class__'] = self.__class__.__name__
+        cpy_dic['created_at'] = self.updated_at.isoformat()
         cpy_dic['updated_at'] = self.updated_at.isoformat()
-        cpy_dic['created_at'] = self.created_at.isoformat()
+        return(cpy_dic)
         return(cpy_dic)
