@@ -51,6 +51,65 @@ class HBNBCommand(cmd.Cmd):
         except:
             print ("** no instance found **")
 
+    def do_destroy(self, command):
+        """
+        Deletes an instance based on the class name and id
+        """
+        if (len(command) == 0):
+            print('** class name missing **')
+            return
+
+        com = command.split()
+        if com[0] != "BaseModel":
+            print ("** class doesn't exist **")
+            return
+
+        if len(com) == 1:
+            print ("** instance id missing **")
+            return
+
+        try:
+            des = storage.all()
+            des.pop(f'{com[0]}.{com[1]}')
+        except:
+            print ("** no instance found **")
+
+    def do_all(self, command):
+        """
+        Prints all string representation of all 
+        instances based or not on the class name
+        """
+        if (len(command) == 0 or command == "BaseModel"):
+            strd_k = storage.all().items()
+            strd = {str(key): str(value) for key, value in strd_k}
+            print (strd)
+        else:
+            if (command != "BaseModel"):
+                print("** class doesn't exist **")
+                return
+
+    def do_update(self, command):
+        """
+        Updates an instance based on the class name and id
+        """
+        if (len(command) == 0):
+            print('** class name missing **')
+            return
+
+        com = command.split()
+        if com[0] != "BaseModel":
+            print ("** class doesn't exist **")
+            return
+
+        if len(com) == 1:
+            print ("** instance id missing **")
+            return
+
+
+        except:
+            print ("** no instance found **")
+
+
     def do_quit(self, command):
         """
         Exit the program
@@ -64,6 +123,8 @@ class HBNBCommand(cmd.Cmd):
         Usage: EOF
         """
         return True
+    
+  
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
