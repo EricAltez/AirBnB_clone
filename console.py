@@ -15,14 +15,21 @@ from models.review import Review
 from models.state import State
 import json
 import cmd
-import re
 
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     def basename(self):
-        bn_list = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+        bn_list = [
+                "BaseModel",
+                "User",
+                "State",
+                "City",
+                "Amenity",
+                "Place",
+                "Review"
+                ]
         return (bn_list)
 
     def do_create(self, command):
@@ -81,8 +88,8 @@ class HBNBCommand(cmd.Cmd):
             return
 
         try:
-            des = storage.all()
-            des.pop(f'{com[0]}.{com[1]}')
+            storage.all().pop(f'{com[0]}.{com[1]}')
+            storage.save()
         except Exception as err:
             print("** no instance found **")
 
@@ -135,6 +142,7 @@ class HBNBCommand(cmd.Cmd):
                 setattr(storage.all()[dict_k], com[2], com[3][0])
             else:
                 setattr(storage.all()[dict_k], com[2], com[3])
+            storage.save()
         except Exception as err:
             print("** no instance found **")
 
