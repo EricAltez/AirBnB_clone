@@ -68,10 +68,13 @@ class TestFileStorage(unittest.TestCase):
 
         self.assertIsNotNone(models.storage.all())
 
-    def test_model_all(self):
-        """check empty filepath"""
-
-        __file_path = None
+    def test_empty(self):
+        """test if json is empty or not"""
+        new = BaseModel()
+        conten = new.to_dict()
+        new.save()
+        new2 = BaseModel(**conten)
+        self.assertNotEqual(os.path.getsize("file.json"), 0)
 
 
 if __name__ == '__main__':
