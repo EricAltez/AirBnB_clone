@@ -22,10 +22,6 @@ class test_state_instantiates(unittest.TestCase):
     def test_instantiation_with_kwargs(self):
         self.assertIs(State, type(State(name="California")))
 
-
-class test_state_save(unittest.TestCase):
-    """ Unittest for testing save"""
-
     def test_save(self):
         state = State()
         state.save()
