@@ -42,6 +42,13 @@ class test_state_save(unittest.TestCase):
         state.save()
         self.assertIs(type(state.to_dict()), dict)
 
+    def test_none(self):
+        """test for state none"""
+        self.state = State()
+        self.state.name = None
+        self.assertTrue(hasattr(self.state, "name"))
+        self.assertEqual(None, self.state.name)
+
 
 if __name__ == "__main__":
     unittest.main()
