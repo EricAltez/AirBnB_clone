@@ -68,6 +68,11 @@ class TestFileStorage(unittest.TestCase):
 
         self.assertIsNotNone(models.storage.all())
 
+    def test_model_all(self):
+        """check empty filepath"""
+
+        __file_path = None
+
 
 if __name__ == '__main__':
     unittest.main()
