@@ -1,32 +1,47 @@
-#!/usr/bin/python3
-'''test state'''
+#!/usr/bin/env python3
+"""
+Unitest for models/state.py
 
-import json
+Unittest classes:
+    test_state_instantiates
+    test_state_save
+    test_state_dict
+    """
+
 import unittest
-from datetime import datetime
+import models
 from models.state import State
 
 
-class T_State(unittest.TestCase):
-    '''test ameity class'''
+class test_state_instantiates(unittest.TestCase):
+    """ Unittest for testing instantiation"""
 
-    def test_ty(self):
-        '''check types'''
-        clstest = Amenity()
-        self.assertEqual(type(clstest), State)
-        self.assertEqual(type(clstest.id), str)
-        self.assertEqual(type(clstest.created_at), datetime)
-        self.assertEqual(type(clstest.updated_at), datetime)
-        self.assertEqual(type(clstest.__str__()), str)
-        self.assertNotEqual(len(clstest.__str__()), 0)
-        self.assertEqual(type(clstest.name), str)
-        self.assertEqual(str(clstest), "[State] ({}) \
-        {}".format(clstest.id, clstest.__dict__))
+    def test_instantiation(self):
+        self.assertIs(State, type(State()))
 
-    def test_meth(self):
-        '''test method'''
-        cls_test = State()
-        self.assertEqual(type(cls_test.to_dict()), dict)
+    def test_instantiation_with_kwargs(self):
+        self.assertIs(State, type(State(name="California")))
 
-if __name__ == '__main__':
+
+class test_state_save(unittest.TestCase):
+    """ Unittest for testing save"""
+
+    def test_save(self):
+        state = State()
+        state.save()
+        self.assertNotEqual(state.created_at, state.updated_at)
+
+    def test_save_updated(self):
+        state = State()
+        state.save()
+        state.save()
+        self.assertNotEqual(state.created_at, state.updated_at)
+
+    def test_save_to_json(self):
+        state = State()
+        state.save()
+        self.assertIs(type(state.to_dict()), dict)
+
+
+if __name__ == "__main__":
     unittest.main()
