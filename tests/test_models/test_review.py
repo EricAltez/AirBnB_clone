@@ -1,29 +1,31 @@
 #!/usr/bin/python3
-'''test review'''
-
+"""Module of tests for amenity"""
 import json
 import unittest
 from datetime import datetime
 from models.review import Review
 
 
-class T_Review(unittest.TestCase):
-    '''test review class'''
+class TestsState(unittest.TestCase):
+    """Class for tests Review"""
 
-    def test_ty(self):
-        '''check types'''
-        clstest = review()
-        self.assertEqual(type(clstest), Review)
-        self.assertEqual(type(clstest.id), str)
-        self.assertEqual(type(clstest.created_at), datetime)
-        self.assertEqual(type(clstest.updated_at), datetime)
-        self.assertEqual(type(clstest.__str__()), str)
-        self.assertNotEqual(len(clstest.__str__()), 0)
-        self.assertEqual(type(clstest.name), str)
-        self.assertEqual(str(clstest), "[Review] ({}) \
-        {}".format(clstest.id, clstest.__dict__))
+    def test_creation(self):
+        """Tests for review creation"""
+        new_r = Review()
+        self.assertEqual(type(new_r), Review)
 
-    def test_meth(self):
-        '''test method'''
-        cls_test = Review()
-        self.assertEqual(type(cls_test.to_dict()), dict)
+        self.assertEqual(type(new_r.id), str)
+        self.assertEqual(type(new_r.created_at), datetime)
+        self.assertEqual(type(new_r.updated_at), datetime)
+        self.assertEqual(type(new_r.__str__()), str)
+        self.assertNotEqual(len(new_r.__str__()), 0)
+        self.assertEqual(type(new_r.place_id), str)
+        self.assertEqual(type(new_r.user_id), str)
+        self.assertEqual(type(new_r.text), str)
+        self.assertEqual(str(new_r), f'[Review] ({new_r.id}) \
+{new_r.__dict__}')
+
+    def test_methods(self):
+        """Tests for user methods"""
+        new_r = Review()
+        self.assertEqual(type(new_r.to_dict()), dict)

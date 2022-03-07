@@ -1,29 +1,40 @@
 #!/usr/bin/python3
-'''test place'''
-
+"""Module of tests for place"""
 import json
 import unittest
 from datetime import datetime
 from models.place import Place
 
 
-class T_Place(unittest.TestCase):
-    '''test place class'''
+class TestsState(unittest.TestCase):
+    """Class for tests Place"""
 
-    def test_ty(self):
-        '''check types'''
-        clstest = Amenity()
-        self.assertEqual(type(clstest), Place)
-        self.assertEqual(type(clstest.id), str)
-        self.assertEqual(type(clstest.created_at), datetime)
-        self.assertEqual(type(clstest.updated_at), datetime)
-        self.assertEqual(type(clstest.__str__()), str)
-        self.assertNotEqual(len(clstest.__str__()), 0)
-        self.assertEqual(type(clstest.name), str)
-        self.assertEqual(str(clstest), "[Place] ({}) \
-        {}".format(clstest.id, clstest.__dict__))
+    def test_creation(self):
+        """Tests for place creation"""
+        new_p = Place()
+        self.assertEqual(type(new_p), Place)
 
-    def test_meth(self):
-        '''test method'''
-        cls_test = Place()
-        self.assertEqual(type(cls_test.to_dict()), dict)
+        self.assertEqual(type(new_p.id), str)
+        self.assertEqual(type(new_p.created_at), datetime)
+        self.assertEqual(type(new_p.updated_at), datetime)
+        self.assertEqual(type(new_p.__str__()), str)
+        self.assertNotEqual(len(new_p.__str__()), 0)
+        self.assertEqual(type(new_p.city_id), str)
+        self.assertEqual(type(new_p.user_id), str)
+        self.assertEqual(type(new_p.amenity_ids), list)
+        self.assertEqual(type(new_p.name), str)
+        self.assertEqual(type(new_p.description), str)
+        self.assertEqual(type(new_p.number_rooms), int)
+        self.assertEqual(type(new_p.number_bathrooms), int)
+        self.assertEqual(type(new_p.max_guest), int)
+        self.assertEqual(type(new_p.price_by_night), int)
+        self.assertEqual(type(new_p.latitude), float)
+        self.assertEqual(type(new_p.longitude), float)
+
+        self.assertEqual(str(new_p), f'[Place] ({new_p.id}) \
+{new_p.__dict__}')
+
+    def test_methods(self):
+        """Tests for user methods"""
+        new_p = Place()
+        self.assertEqual(type(new_p.to_dict()), dict)
