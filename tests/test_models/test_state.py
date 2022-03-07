@@ -45,6 +45,10 @@ class test_state_instantiates(unittest.TestCase):
         self.assertTrue(hasattr(self.state, "name"))
         self.assertEqual(None, self.state.name)
 
+     def test_args_unused(self):
+        state1 = State(None)
+        self.assertNotIn(None, state1.__dict__.values())
+
 
 if __name__ == "__main__":
     unittest.main()
