@@ -50,5 +50,6 @@ class T_BaseModel(unittest.TestCase):
         bm = BaseModel()
         self.assertEqual(type(bm.updated_at), datetime)
 
+
 if __name__ == '__main__':
     unittest.main()
