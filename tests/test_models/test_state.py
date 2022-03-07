@@ -1,29 +1,29 @@
 #!/usr/bin/python3
-'''test user'''
+'''test state'''
 
 import json
 import unittest
 from datetime import datetime
-from models.user import User
+from models.state import State
 
 
-class T_User(unnitest.TestCase):
-    '''test user class'''
+class T_State(unittest.TestCase):
+    '''test ameity class'''
 
     def test_ty(self):
         '''check types'''
-        clstest = User()
-        self.assertEqual(type(clstest), User)
+        clstest = Amenity()
+        self.assertEqual(type(clstest), State)
         self.assertEqual(type(clstest.id), str)
         self.assertEqual(type(clstest.created_at), datetime)
         self.assertEqual(type(clstest.updated_at), datetime)
         self.assertEqual(type(clstest.__str__()), str)
         self.assertNotEqual(len(clstest.__str__()), 0)
         self.assertEqual(type(clstest.name), str)
-        self.assertEqual(str(clstest), "[User] ({}) \
+        self.assertEqual(str(clstest), "[State] ({}) \
         {}".format(clstest.id, clstest.__dict__))
 
     def test_meth(self):
         '''test method'''
-        cls_test = User()
+        cls_test = State()
         self.assertEqual(type(cls_test.to_dict()), dict)
