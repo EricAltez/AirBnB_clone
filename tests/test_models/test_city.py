@@ -27,3 +27,6 @@ class T_City(unittest.TestCase):
         '''test method'''
         cls_test = City()
         self.assertEqual(type(cls_test.to_dict()), dict)
+
+if __name__ == '__main__':
+    unittest.main()

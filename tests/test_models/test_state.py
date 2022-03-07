@@ -27,3 +27,6 @@ class T_State(unittest.TestCase):
         '''test method'''
         cls_test = State()
         self.assertEqual(type(cls_test.to_dict()), dict)
+
+if __name__ == '__main__':
+    unittest.main()

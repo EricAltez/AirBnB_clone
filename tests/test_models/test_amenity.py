@@ -27,3 +27,6 @@ class T_Amenity(unittest.TestCase):
         '''test method'''
         cls_test = Amenity()
         self.assertEqual(type(cls_test.to_dict()), dict)
+
+if __name__ == '__main__':
+    unittest.main()
