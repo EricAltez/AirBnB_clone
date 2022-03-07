@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Unitest for models/amenity.py
+Unitest for models/city.py
 
 Unittest classes:
-    Test_amentity_instantiation
+    Test_city_instantiation
     """
 import os
 import unittest
@@ -13,76 +13,80 @@ from models.amenity import Amenity
 from time import sleep
 
 
-class Test_models_amenity(unittest.TestCase):
+class Test_models_city(unittest.TestCase):
     """
-        Test_models_amenity class
+        Test_models_city class
     """
 
     def test_instantiation_no_args(self):
-        self.assertEqual(Amenity, type(Amenity()))
+        self.assertEqual(City, type(City()))
 
     def test_args_unused(self):
-        amen1 = Amenity(None)
-        self.assertNotIn(None, amen1.__dict__.values())
+        city1 = City(None)
+        self.assertNotIn(None, city1.__dict__.values())
 
     def test_instantiation_kwargs(self):
         am_date = datetime.today()
         dt_iso = am_date.isoformat()
-        amen1 = Amenity(id="123", created_at=dt_iso, updated_at=dt_iso)
-        self.assertEqual(amen1.id, "123")
-        self.assertEqual(amen1.created_at, am_date)
-        self.assertEqual(amen1.updated_at, am_date)
+        city1 = City(id="123", created_at=dt_iso, updated_at=dt_iso)
+        self.assertEqual(city1.id, "123")
+        self.assertEqual(city1.created_at, am_date)
+        self.assertEqual(city1.updated_at, am_date)
 
     def test_instantiation_kwargs_none(self):
         with self.assertRaises(TypeError):
-            Amenity(id=None, created_at=None, updated_at=None)
+            City(id=None, created_at=None, updated_at=None)
 
     def test_instantiation_stored_in_objects(self):
-        self.assertIn(Amenity(), models.storage.all().values())
+        self.assertIn(City(), models.storage.all().values())
 
     def test_id_public_str(self):
-        self.assertEqual(str, type(Amenity().id))
+        self.assertEqual(str, type(City().id))
 
     def test_created_public_datetime(self):
         self.assertEqual(datetime, type(Amenity().created_at))
 
     def test_updated_public_datetime(self):
-        self.assertEqual(datetime, type(Amenity().updated_at))
+        self.assertEqual(datetime, type(City().updated_at))
 
     def test_name_public_class_attr(self):
-        amen1 = Amenity()
-        self.assertEqual(str, type(Amenity.name))
-        self.assertIn("name", dir(Amenity()))
-        self.assertNotIn("name", amen1.__dict__)
+        city1 = City()
+        self.assertEqual(str, type(City.name))
+        self.assertIn("name", dir(City()))
+        self.assertNotIn("name", city1.__dict__)
 
-    def test_two_amenities_ids(self):
-        amen1 = Amenity()
-        amen2 = Amenity()
-        self.assertNotEqual(amen1.id, amen2.id)
+    def test_twocity_ids(self):
+        city1 = City()
+        city2 = City()
+        self.assertNotEqual(city1.id, city2.id)
 
-    def test_two_amenities_created_at(self):
-        amen1 = Amenity()
+    def test_two_city_created_at(self):
+        city1 = City()
         sleep(0.1)
-        amen2 = Amenity()
+        city2 = City()
         self.assertLess(amen1.created_at, amen2.created_at)
 
     def test_two_amenities_updated_at(self):
-        amen1 = Amenity()
+        city1 = City()
         sleep(0.1)
-        amen2 = Amenity()
-        self.assertLess(amen1.updated_at, amen2.updated_at)
+        city2 = City()
+        self.assertLess(city1.updated_at, city2.updated_at)
 
-    def test_amenities_str(self):
+    def test_city_str(self):
         am_date = datetime.today()
         dt_repr = repr(am_date)
-        amen1 = Amenity()
-        amen1.id = "121212"
-        amen1.created_at = amen1.updated_at = am_date
-        amstr = amen1.__str__()
-        self.assertIn("[Amenity] (121212)", amstr)
+        city1 = City()
+        city1.id = "121212"
+        city1.created_at = city1.updated_at = am_date
+        amstr = city1.__str__()
+        self.assertIn("[City] (121212)", amstr)
         self.assertIn("'id': '121212'", amstr)
         self.assertIn("'created_at': " + dt_repr, amstr)
         self.assertIn("'updated_at': " + dt_repr, amstr)
+
+     def test_args_unused(self):
+        city1 = City(None)
+        self.assertNotIn(None, city1.__dict__.values())
 
 
 if __name__ == '__main__':
