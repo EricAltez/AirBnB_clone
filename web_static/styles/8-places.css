@@ -31,14 +31,27 @@
   
   article {
     z-index: -1;
-    display: flex;
     flex-wrap: wrap;
     color: black;
+  }
+  article p {
+    text-align: left;
+    display: flex
   }
   
   /****************************************************/
 
   .article_places_header {
+    width: 100%;
+    display: flex;
+  
+  }
+  .article_places_header2 {
+    width: 100%;
+    display: flex;
+  
+  }
+  .article_places_header3 {
     width: 100%;
     display: flex;
   
@@ -74,9 +87,8 @@
   .user {
     padding: 20px 0 5px;
   }
-  .user b, p {
-    margin: 0;
-    padding: 0;
+  .user div {
+    display: flex;
   }
 
   /***************************/

@@ -3,8 +3,7 @@
     color: white;
     height: 70px;
     width: 100%;
-    border-color: 1px solid #DDDDDD;
-    border-bottom: 1px solid #DDDDDD;
+    border: 1px solid #DDDDDD;
     border-radius: 4px;
     margin: auto;
 }
@@ -69,11 +68,11 @@ button:hover {
 
 /****************************/
 .popover {
+    margin-top: 20px;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     display: none;
     background-color: #FAFAFA;
-    margin: 70px 0 0 0;
 }
 .popover h2 {
     font-size: 16px;
